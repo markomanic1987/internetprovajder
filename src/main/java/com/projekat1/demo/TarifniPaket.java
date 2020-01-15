@@ -38,6 +38,10 @@ public class TarifniPaket {
         this.megabajti = megabajti;
     }
 
+    public int getMegabajti() {
+        return megabajti;
+    }
+
     @Override
     public String toString() {
         return "TarifniPaket{" +

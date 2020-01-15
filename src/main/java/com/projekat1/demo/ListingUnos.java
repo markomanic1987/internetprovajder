@@ -5,13 +5,21 @@ public class ListingUnos implements Comparable<ListingUnos> {
     private int megabajti;
 
     public void dodajMegabajte(int megabajti){
-
+        this.megabajti=this.megabajti+megabajti;
     }
+
+
 
     @Override
     public int compareTo(ListingUnos o) {
-        return 0;
+        if(o.megabajti==megabajti)
+            return 0;
+        if (o.megabajti>megabajti)
+            return -1;
+        return 1;
     }
+
+
 
     public ListingUnos(String url, int megabajti) {
         this.url = url;
@@ -23,6 +31,7 @@ public class ListingUnos implements Comparable<ListingUnos> {
     }
 
     public int getMegabajti() {
+
         return megabajti;
     }
 

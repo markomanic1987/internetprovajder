@@ -1,14 +1,29 @@
 package com.projekat1.demo;
 
+
+
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import javax.persistence.ElementCollection;
+import javax.persistence.Entity;
+import javax.persistence.Id;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
-
+@Entity
 public class InternetProvajder {
+    @Id
     private String imeProvajdera;
+    @ElementCollection(targetClass = Korisnik.class)
     private ArrayList<Korisnik> korisnici;
 
+    public InternetProvajder() {
+    }
+
+    public void setImeProvajdera(String imeProvajdera) {
+        this.imeProvajdera = imeProvajdera;
+    }
 
     public void generisiRacune(){
         for(Korisnik k :korisnici) {
@@ -21,7 +36,7 @@ public class InternetProvajder {
             File f = new File("log.txt");
         try {
             PrintWriter pw = new PrintWriter(f);
-            if(korisnik.surfuj(url,mb)==true){
+            if(korisnik.surfuj(url, mb)){
             pw.print(korisnik.getBrojUgovora()+" "+korisnik.surfuj(url,mb)+" "+url+" "+mb+" \n");
             pw.close(); } else
             System.out.println("nema dovoljno megabajta");
@@ -62,6 +77,7 @@ public class InternetProvajder {
 
 
     }
+
     public void dodajKorisnika(Korisnik korisnik){
         korisnici.add(korisnik);
        /* for (Korisnik k :korisnici){
@@ -88,5 +104,21 @@ public class InternetProvajder {
                 "imeProvajdera='" + imeProvajdera + '\'' +
                 '}';
     }
+
+    public ArrayList<Korisnik> getKorisnici() {
+
+        return korisnici;
+    }
+
+    public String  prikaziSveKorisnike(){
+        String s="Korisnici \n";
+        for(Korisnik k : korisnici)
+            s=s+k+"\n";
+
+    return s;
+
+    }
+
 }
+
 

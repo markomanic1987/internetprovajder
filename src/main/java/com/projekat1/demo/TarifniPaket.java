@@ -1,8 +1,9 @@
 package com.projekat1.demo;
 
 
+import javax.persistence.Entity;
 
-
+@Entity
 public class TarifniPaket {
    private int brzina;
    private double cenaPaketa;
@@ -40,6 +41,22 @@ public class TarifniPaket {
 
     public int getMegabajti() {
         return megabajti;
+    }
+
+    public void setBrzina(int brzina) {
+        this.brzina = brzina;
+    }
+
+    public void setCenaPaketa(double cenaPaketa) {
+        this.cenaPaketa = cenaPaketa;
+    }
+
+    public void setNeogranicenSaobracaj(boolean neogranicenSaobracaj) {
+        this.neogranicenSaobracaj = neogranicenSaobracaj;
+    }
+
+    public void setCenaPoMegabajtu(double cenaPoMegabajtu) {
+        this.cenaPoMegabajtu = cenaPoMegabajtu;
     }
 
     @Override

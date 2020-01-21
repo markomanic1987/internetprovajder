@@ -1,19 +1,22 @@
 package com.projekat1.demo;
 
+import javax.persistence.Entity;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
-
+@Entity
 public class PostpaidKorisnik extends Korisnik {
     private double prekoracenje;
 
 
-    public PostpaidKorisnik(String ime, String prezime, String adresa, String brojUgovora, InternetProvajder internetProvajder, TarifniPaket tarifniPaket, double prekoracenje) {
+    public PostpaidKorisnik(String ime, String prezime, String adresa, String brojUgovora, InternetProvajder internetProvajder, TarifniPaket tarifniPaket) {
             super(ime, prezime, adresa, brojUgovora, internetProvajder, tarifniPaket);
-        this.prekoracenje = prekoracenje;
-    }
 
+    }
+    public PostpaidKorisnik(){
+
+    }
     public double ukupnoZaNaplatu(){
         double suma =0;
         for(TarifniDodatak t : getTarifniDodataci()){
@@ -41,7 +44,8 @@ public class PostpaidKorisnik extends Korisnik {
                 if(megabajti>getTarifniPaket().getMegabajti()){
                 prekoracenje=(megabajti-getTarifniPaket().getMegabajti())*getTarifniPaket().getCenaPoMegabajtu();
 
-                    getListingUnosi().add(new ListingUnos(url,megabajti));}
+                    getListingUnosi().add(new ListingUnos(url,megabajti));
+                }
                     else {
                     getTarifniPaket().setMegabajti(getTarifniPaket().getMegabajti()-megabajti);
 
@@ -80,8 +84,10 @@ public class PostpaidKorisnik extends Korisnik {
 
     @Override
     public String toString() {
-        return "PostpaidKorisnik{" +
-                "prekoracenje=" + prekoracenje +
-                '}';
+        return getIme()+ " "+getBrojUgovora()+" "+prekoracenje;
+    }
+
+    public void setPrekoracenje(double prekoracenje) {
+        this.prekoracenje = prekoracenje;
     }
 }

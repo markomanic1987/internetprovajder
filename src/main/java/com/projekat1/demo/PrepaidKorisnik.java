@@ -1,40 +1,48 @@
 package com.projekat1.demo;
 
+import javax.persistence.Entity;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
-
+@Entity
 public class PrepaidKorisnik extends Korisnik {
    private double kredit;
 
+    public void setKredit(double kredit) {
+        this.kredit = kredit;
+    }
 
     public PrepaidKorisnik(String ime, String prezime, String adresa, String brojUgovora, InternetProvajder internetProvajder, TarifniPaket tarifniPaket) {
         super(ime, prezime, adresa, brojUgovora, internetProvajder, tarifniPaket);
+    }
+    public PrepaidKorisnik(){
+
     }
     public void doupuniKredit(double kredit){
         this.kredit=this.kredit+kredit;
     }
     @Override
     public boolean surfuj(String url,int megabajti){
-
+            boolean check = false;
 
             if(getTarifniDodataci().contains(url)){
                 getListingUnosi().add(new ListingUnos(url, megabajti));
-
+                    check=true;
             } else {
                 if(kredit>megabajti*getTarifniPaket().getCenaPoMegabajtu()){
                     kredit=kredit-(getTarifniPaket().getCenaPoMegabajtu());
 
                     getListingUnosi().add(new ListingUnos(url,megabajti));
+                    check= true;
                        }
                     else
                         System.out.println("nemate dovoljno kredita za surf");
-                        return false;
+                        check= false;
 
                 }
 
 
-        return true;
+        return check;
     }
     @Override
     public void dodajTarifniDodatak(TarifniDodatak tarifniDodatak){
@@ -51,9 +59,7 @@ public class PrepaidKorisnik extends Korisnik {
 
     @Override
     public String toString() {
-        return "PrepaidKorisnik{" +
-                "kredit=" + kredit +
-                '}';
+        return getIme()+ " "+getBrojUgovora()+" "+kredit;
     }
 }
 

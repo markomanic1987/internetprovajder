@@ -1,15 +1,23 @@
 package com.projekat1.demo;
 
-import java.util.*;
 
+import javax.persistence.*;
+import java.util.*;
+@MappedSuperclass
+@Entity
 public abstract class Korisnik implements IzradaListinga{
     private String ime;
     private String prezime;
     private String adresa;
+    @Id
     private String brojUgovora;
+    @ManyToOne
     private InternetProvajder internetProvajder;
+    @ManyToOne
     private TarifniPaket tarifniPaket;
+    @ElementCollection(targetClass = TarifniDodatak.class) //Collection koji treba je lista ili mapa, arraylist ne moze da se anotira
     private ArrayList<TarifniDodatak> tarifniDodaci;
+    @ElementCollection(targetClass = ListingUnos.class)
     private ArrayList<ListingUnos> listingUnosi;
 
 
@@ -31,6 +39,9 @@ public abstract class Korisnik implements IzradaListinga{
     @Override
     public int hashCode() {
         return Objects.hash(getIme(), getPrezime(), getAdresa(), getBrojUgovora(), getInternetProvajder(), getTarifniPaket(), tarifniDodaci, getListingUnosi());
+    }
+    public Korisnik(){
+
     }
 
     public Korisnik(String ime, String prezime, String adresa, String brojUgovora, InternetProvajder internetProvajder, TarifniPaket tarifniPaket) {
@@ -111,4 +122,37 @@ public abstract class Korisnik implements IzradaListinga{
                 ", tarifniPaket=" + tarifniPaket +
                 '}';
     }
+
+    public void setIme(String ime) {
+        this.ime = ime;
+    }
+
+    public void setPrezime(String prezime) {
+        this.prezime = prezime;
+    }
+
+    public void setAdresa(String adresa) {
+        this.adresa = adresa;
+    }
+
+    public void setBrojUgovora(String brojUgovora) {
+        this.brojUgovora = brojUgovora;
+    }
+
+    public void setInternetProvajder(InternetProvajder internetProvajder) {
+        this.internetProvajder = internetProvajder;
+    }
+
+    public void setTarifniPaket(TarifniPaket tarifniPaket) {
+        this.tarifniPaket = tarifniPaket;
+    }
+
+    public void setTarifniDodaci(ArrayList<TarifniDodatak> tarifniDodaci) {
+        this.tarifniDodaci = tarifniDodaci;
+    }
+
+    public void setListingUnosi(ArrayList<ListingUnos> listingUnosi) {
+        this.listingUnosi = listingUnosi;
+    }
 }
+

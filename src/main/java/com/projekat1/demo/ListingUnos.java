@@ -1,5 +1,8 @@
 package com.projekat1.demo;
 
+import javax.persistence.Entity;
+
+@Entity
 public class ListingUnos implements Comparable<ListingUnos> {
     private String url;
     private int megabajti;
@@ -33,6 +36,14 @@ public class ListingUnos implements Comparable<ListingUnos> {
     public int getMegabajti() {
 
         return megabajti;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    public void setMegabajti(int megabajti) {
+        this.megabajti = megabajti;
     }
 
     @Override
